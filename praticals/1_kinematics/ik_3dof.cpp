@@ -32,7 +32,7 @@ static void Reach(int i, const vec3 &target, std::vector<Link> &const links) {
 
   // Get Dot of the two vectors
   float cosAngle = dot(vLinkBaseToTargetDirection, vLinkBaseToEndEffDirection);
-  if (abs(cosAngle) < 1.0f) {
+  /*if (abs(cosAngle) < 1.0f) {
     // *********************************
     // Get the Axis perpendicular to the two vectors
 	  vec3 vLinkPerp = (cross(vLinkBaseToTargetDirection, vLinkBaseToEndEffDirection));
@@ -42,16 +42,21 @@ static void Reach(int i, const vec3 &target, std::vector<Link> &const links) {
 	  float vecAngle = dot(vLinkBaseToTargetDirection, vLinkBaseToEndEffDirection);
 
     // Turn into a Quat
-
-	  quat dotQuat = toQuat(mat3())
+	  dquat dotQuat = angleAxis(vecAngle, vLinkPerp);  //Normalise?
 
     // Multply our current Quat with it
+	  dquat qPos = dotQuat * qCur;
 
     // Pull out the angle and axis components, set the link params
+	  float qAng = angle(qPos);
+	  vec3 qAxis = axis(qPos);
+	  links[i].m_angle = qAng;
+	  links[i].m_axis = qAxis;
 
 
-    // *********************************
-  }
+
+    // *********************************  
+  } */
 }
 
 void ik_3dof_Update(const vec3 &const target, std::vector<Link> &const links, const float linkLength) {
